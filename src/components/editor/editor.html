@@ -1,13 +1,29 @@
-<div class="editor">
-  <div class="editor-wrap">
-    <textarea name="editor"
-      class="editor__textarea"
-      ng-model="editor.content">
-    </textarea>
+<div class="editor-page">
+  <div class="editor-buttons-container">
+    <div class="editor-buttons__dropdown btn-group"
+      dropdown>
+      <button class="editor-button__save--source btn btn-primary dropdown-toggle"
+        dropdown-toggle>
+        Export <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li ng-click="editor.exportSource()"><a href="#"> Source </a></li>
+        <li><a href="#"> PDF </a></li>
+      </ul>
+    </div>
   </div>
-  <div class="preview-wrap">
-    <div id="preview"
-      ng-bind-html="editor.markdown.toHTML(editor.content)">
+
+  <div class="editor">
+    <div class="editor-wrap">
+      <textarea name="editor"
+        class="editor__textarea"
+        ng-model="editor.content">
+      </textarea>
+    </div>
+    <div class="preview-wrap">
+      <div id="preview"
+        ng-bind-html="editor.markdown.toHTML(editor.content)">
+      </div>
     </div>
   </div>
 </div>

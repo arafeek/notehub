@@ -1,10 +1,18 @@
 .editor {
-  background-color: lightgray;
-  border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 20px;
+}
+
+.editor-page {
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+.editor-buttons-container {
+  padding: 20px;
+  padding-bottom: 0;
 }
 
 .editor__textarea {
