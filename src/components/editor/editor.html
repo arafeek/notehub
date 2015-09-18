@@ -1,0 +1,13 @@
+<div class="editor">
+  <div class="editor-wrap">
+    <textarea name="editor"
+      class="editor__textarea"
+      ng-model="editor.content">
+    </textarea>
+  </div>
+  <div class="preview-wrap">
+    <div id="preview"
+      ng-bind-html="editor.markdown.toHTML(editor.content)">
+    </div>
+  </div>
+</div>
