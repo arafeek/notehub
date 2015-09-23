@@ -1,8 +1,12 @@
 .editor {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 20px;
+}
+
+.editor-checkbox {
+  padding-left: 10px;
 }
 
 .editor-page {
@@ -27,13 +31,15 @@
 
 .editor-wrap {
   min-width: 400px;
-  width: 48%;
+  flex: 1;
+  margin-right: 10px;
 }
 
 .preview-wrap {
   background-color: #f9f9f9;
   border: 1px solid #aaa;
+  flex: 1;
+  margin-left: 10px;
   min-width: 400px;
   padding: 0 10px;
-  width: 48%;
 }

@@ -8,6 +8,12 @@ export default class EditorController {
     this.markdown = require('markdown').markdown;
     this.content = '';
     this.$timeout = $timeout;
+
+    let settings = {};
+    settings.showPreview = true;
+    // Add more default settings here
+
+    this.settings = settings;
   }
 
   exportSource() {
@@ -35,5 +41,9 @@ export default class EditorController {
       // Trigger the file read
       fileReader.readAsText(file);
     }
+  }
+
+  toggleShowPreview() {
+    this.settings.showPreview = !this.settings.showPreview;
   }
 }

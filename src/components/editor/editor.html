@@ -1,5 +1,6 @@
 <div class="editor-page">
   <div class="editor-buttons-container">
+  <!-- Export Dropdown -->
     <div class="editor-buttons__dropdown btn-group"
       dropdown>
       <button class="editor-button__save btn btn-primary dropdown-toggle"
@@ -11,9 +12,26 @@
         <li><a href="#"> PDF </a></li>
       </ul>
     </div>
-    <button class="editor-button__options btn btn-warning">
-      <span class="glyphicon glyphicon-cog"></span> Settings
-    </button>
+    <!-- / -->
+    <!-- Settings Dropdown -->
+    <div class="editor-buttons__dropdown btn-group editor-buttons__setting-group"
+      dropdown>
+      <button class="editor-button__options btn btn-warning dropdown-toggle"
+        dropdown-toggle>
+        <span class="glyphicon glyphicon-cog"></span> Settings
+        <span class="caret"></span>
+      </button>
+      <div class="dropdown-menu">
+        <div class="checkbox editor-checkbox">
+          <label>
+            <input type="checkbox" ng-model="editor.settings.showPreview">
+            Show Preview
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- / -->
     <button class="editor-button__import btn btn-success"
       ng-click="editor.importFile()">
       <span class="glyphicon glyphicon-upload"></span> Import
@@ -30,7 +48,8 @@
         ng-model="editor.content">
       </textarea>
     </div>
-    <div class="preview-wrap">
+    <div class="preview-wrap"
+      ng-show="editor.settings.showPreview">
       <div id="preview"
         ng-bind-html="editor.markdown.toHTML(editor.content)">
       </div>
