@@ -32,12 +32,20 @@
     </div>
 
     <!-- / -->
+    <button class="editor-button__save btn btn-info"
+      ng-click="editor.save()">
+      <span class="glyphicon glyphicon-floppy-disk"></span>
+       Save 
+    </button>
+    <!-- Import -->
     <button class="editor-button__import btn btn-success"
       ng-click="editor.importFile()">
-      <span class="glyphicon glyphicon-upload"></span> Import
+      <span class="glyphicon glyphicon-upload"></span>
+       Import 
     </button>
     <input type="file"
       id="file-upload" />
+    <!-- / -->
 
   </div>
 
@@ -45,7 +53,8 @@
     <div class="editor-wrap">
       <textarea name="editor"
         class="editor__textarea"
-        ng-model="editor.content">
+        ng-model="editor.content"
+        ng-keydown="editor.handleKeydown($event)">
       </textarea>
     </div>
     <div class="preview-wrap"
