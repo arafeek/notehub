@@ -1,1 +1,1 @@
-web: npm run build
+web: npm install webpack -g && npm run build && node server
