@@ -76,3 +76,5 @@ export default class EditorController {
     }
   }
 }
+
+EditorController.$inject = ['$timeout'];
