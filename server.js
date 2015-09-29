@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-var port = process.env.PORT || 8888;
+var port = process.env.PORT || 80;
 
 app.listen(port, function() {
   console.log('Magic happens on port: ' + port);
