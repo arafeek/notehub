@@ -109,6 +109,12 @@ module.exports = function makeWebpackConfig (options) {
       // Allow loading html through js
       test: /\.html$/,
       loader: 'raw'
+    }, {
+      // JSON LOADER
+      // Reference: https://github.com/webpack/json-loader
+      // Allow proper loading of JSON docs
+      test: /\.json$/,
+      loader: 'json'
     }]
   };
 

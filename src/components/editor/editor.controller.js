@@ -4,11 +4,13 @@ import ngsanitize from 'angular-sanitize';
 import {saveAs} from 'filesaver.js';
 import {CONFIG} from './editor.constants';
 
+import katex from 'katex';
+
 export default class EditorController {
   constructor($timeout) {
-    this.markdown = require('markdown').markdown;
+    this.markdown = require('markdown-it')();
     this.$timeout = $timeout;
-
+    this.katex = katex;
     let settings = {};
     settings.showPreview = true;
     // Add more default settings here
@@ -73,6 +75,51 @@ export default class EditorController {
       this.save();
       event.preventDefault();
       return false;
+    }
+  }
+
+  handleParseContent(str) {
+    // Regexp to match blocks of the form:
+    /*
+    * ```math
+    *  some latex code goes here
+    *```
+    */
+    // Refer to: http://stackoverflow.com/questions/1979884/how-to-use-javascript-regex-over-multiple-lines
+    let latexBlockExpr = /```math[\s\S]*?```/igm;
+    let mathBlocks = str.match(latexBlockExpr);
+    let nonLatexSegments = str.split(latexBlockExpr);
+    // Create an array of the rendered tex strings
+    //let texBlocks = R.forEach(this.__renderMathToTex, mathBlocks);
+    let texBlocks = R.map((block) => {
+      return this.__renderMathToTex(block);
+    }, mathBlocks || []);
+    // Create an array of the rendered Markdown Strings
+
+    let mdBlocks = R.map((segment) => {
+      return this.markdown.render(segment);
+    }, nonLatexSegments);
+    // Add the rendered strings back to the non TeX strings
+    // hacky from : http://stackoverflow.com/questions/13253856/merge-two-arrays-so-that-the-values-alternate
+
+    let allParsedBlocks = mdBlocks.reduce((arr, v, i) => {
+      return arr.concat(v, texBlocks[i]);
+    }, []);
+
+    return allParsedBlocks.join(' ');
+  }
+
+  __renderMathToTex(mathBlock) {
+    // Need to strip out the prefix (```math) and the suffix (```) from the string
+    // before we pass it to katex
+    let prefix = '```math';
+    let pureTex = mathBlock.substring(mathBlock.indexOf(prefix) + prefix.length,
+      mathBlock.lastIndexOf('```'));
+    try {
+      return katex.renderToString(pureTex);
+    } catch(e) {
+      this.alerts = e;
+      return '';
     }
   }
 }

@@ -13,7 +13,11 @@ import './main.css';
 // Components
 import editor from './components/editor';
 
-// Vendor 
+import R from 'ramda';
+// Export ramda globally
+// Should I do this somewhere else? Meh...
+window.R = R;
+
 angular.module('nh', [
   uirouter,
   routes,

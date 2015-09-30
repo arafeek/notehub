@@ -60,7 +60,7 @@
     <div class="preview-wrap"
       ng-show="editor.settings.showPreview">
       <div id="preview"
-        ng-bind-html="editor.markdown.toHTML(editor.content)">
+        ng-bind-html="editor.handleParseContent(editor.content)">
       </div>
     </div>
   </div>
