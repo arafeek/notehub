@@ -35,7 +35,7 @@ export default class EditorController {
         type: 'text/markdown;charset=UTF-8'
       });
 
-      saveAs(data, this.fileName || 'note.md');
+      saveAs(data, this.filename ? R.replace(/\s/g, '', this.filename) : 'note.md');
     }
   }
 
@@ -46,6 +46,7 @@ export default class EditorController {
       fileReader.onloadend = (e) => {
         this.$timeout(() => {
           this.content = fileReader.result;
+          this.filename = file.name;
           // Clear the input field
           document.getElementById('file-upload').value = null;
         }, 0) 
