@@ -1,16 +1,15 @@
 //import ngshowdown from 'ng-showdown';
 
-import ngsanitize from 'angular-sanitize';
 import {saveAs} from 'filesaver.js';
 import {CONFIG} from './editor.constants';
-
 import katex from 'katex';
 
-export default class EditorController {
-  constructor($timeout) {
+class EditorController {
+  constructor($timeout, $sce) {
     this.markdown = require('markdown-it')();
     this.$timeout = $timeout;
     this.katex = katex;
+    this.$sce = $sce;
     let settings = {};
     settings.showPreview = true;
     // Add more default settings here
@@ -67,7 +66,6 @@ export default class EditorController {
 
     this.storage.setItem(CONFIG.SAVE, JSON.stringify(saveObj));
     console.log('Content saved!');
-
   }
 
   handleKeydown(event) {
@@ -107,7 +105,7 @@ export default class EditorController {
       return arr.concat(v, texBlocks[i]);
     }, []);
 
-    return allParsedBlocks.join(' ');
+    return this.$sce.trustAsHtml(allParsedBlocks.join(' '));
   }
 
   __renderMathToTex(mathBlock) {
@@ -125,4 +123,5 @@ export default class EditorController {
   }
 }
 
-EditorController.$inject = ['$timeout'];
+EditorController.$inject = ['$timeout', '$sce'];
+export default EditorController;
