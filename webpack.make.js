@@ -5,6 +5,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanPlugin = require('clean-webpack-plugin');
 
 module.exports = function makeWebpackConfig (options) {
   /**
@@ -200,6 +201,9 @@ module.exports = function makeWebpackConfig (options) {
   // Add build specific plugins
   if (BUILD) {
     config.plugins.push(
+      // Plugin for deleting the build folder (public) between builds
+      // Reference: https://www.npmjs.com/package/clean-webpack-plugin
+      new CleanPlugin(['public']),
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
       // Only emit files when there are no errors
       new webpack.NoErrorsPlugin(),
