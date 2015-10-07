@@ -29,6 +29,15 @@
   width: 100%;
 }
 
+.editor__filename-input {
+  /* Give it the same amount of padding as the buttons */
+  padding: 6px 12px;
+}
+
+input[type="file"].editor-file-upload__input {
+  display: inline-block;
+}
+
 .editor-wrap {
   min-width: 400px;
   flex: 1;

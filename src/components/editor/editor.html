@@ -1,6 +1,8 @@
 <div class="editor-page">
   <div class="editor-buttons-container">
     <input name="filename"
+      class="editor__filename-input"
+      placeholder="Enter a filename"
       ng-model="editor.filename" />
   <!-- Export Dropdown -->
     <div class="editor-buttons__dropdown btn-group"
@@ -46,6 +48,7 @@
        Import 
     </button>
     <input type="file"
+      class="editor-file-upload__input"
       id="file-upload" />
     <!-- / -->
 

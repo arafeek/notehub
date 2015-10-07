@@ -10,6 +10,7 @@ import config from './app.config';
 import routes from './routes';
 // Main css file
 import './main.css';
+import './css/overrides.css';
 // Components
 import editor from './components/editor';
 
