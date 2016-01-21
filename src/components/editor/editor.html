@@ -52,6 +52,17 @@
       id="file-upload" />
     <!-- / -->
 
+    <button class="editor-button__new btn btn-danger"
+      ng-click="editor.newDoc()">
+      <span class="glyphicon glyphicon-plus"></span>
+       New 
+    </button>
+
+    <button class="login-button btn btn-success">
+      <span class="glyphicon glyphicon-log-in"></span>
+       {{editor.getLoginButtonText()}} 
+    </button>
+
   </div>
 
   <div class="editor">

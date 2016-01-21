@@ -3,6 +3,7 @@
 import {saveAs} from 'filesaver.js';
 import {CONFIG} from './editor.constants';
 import katex from 'katex';
+//import FirebaseService from '../../core/firebase.service';
 
 class EditorController {
   constructor($timeout, $sce) {
@@ -12,6 +13,7 @@ class EditorController {
     this.$sce = $sce;
     let settings = {};
     settings.showPreview = true;
+    //this.FirebaseService = FirebaseService;
     // Add more default settings here
 
     this.settings = settings;
@@ -120,6 +122,13 @@ class EditorController {
       this.alerts = e;
       return '';
     }
+  }
+
+  getLoginButtonText() {
+    if (this.loggedIn) {
+      return this.username;
+    }
+    return 'Login';
   }
 }
 
