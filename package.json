@@ -42,11 +42,13 @@
     "html-webpack-plugin": "^1.5.2",
     "katex": "^0.5.1",
     "markdown-it": "^4.4.0",
+    "ng-forward": "0.0.1-alpha.12",
     "node-libs-browser": "^0.5.2",
     "null-loader": "^0.1.1",
     "postcss-loader": "^0.6.0",
     "ramda": "^0.17.1",
     "raw-loader": "^0.5.1",
+    "rxjs": "^5.0.0-beta.1",
     "style-loader": "^0.12.3",
     "webpack": "^1.9.11"
   },

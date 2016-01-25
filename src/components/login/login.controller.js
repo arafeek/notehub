@@ -7,7 +7,7 @@ import Firebase from 'firebase';
 class LoginController {
   constructor($timeout) {
     this.displayName = 'Login';
-    this.ref = new Firebase("https://notehub-data.firebaseio.com");
+    this.ref = new Firebase('https://notehub-data.firebaseio.com');
     this.$timeout = $timeout;
     // console.log(this);
     // this.firebaseFactory.setBaseUrl('https://notehub-data.firebaseio.com');
@@ -16,6 +16,7 @@ class LoginController {
         console.log("Login Failed!", error);
       } else {
         // HAX!!!! Use ng-fire instead
+        console.log(authData);
         this.$timeout(() => {
           this.authData = authData;
           this.displayName = authData.google.displayName;
