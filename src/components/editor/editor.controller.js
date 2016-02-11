@@ -3,9 +3,16 @@
 import {saveAs} from 'filesaver.js';
 import {CONFIG} from './editor.constants';
 import katex from 'katex';
-//import FirebaseService from '../../core/firebase.service';
+import './editor.css';
+import {Component, Inject} from 'ng-forward';
 
-class EditorController {
+@Component({
+  selector: 'editor',
+  template: require('./editor.html'),
+})
+@Inject('$timeout', '$sce')
+
+export default class EditorController {
   constructor($timeout, $sce) {
     this.markdown = require('markdown-it')();
     this.$timeout = $timeout;
@@ -13,7 +20,6 @@ class EditorController {
     this.$sce = $sce;
     let settings = {};
     settings.showPreview = true;
-    //this.FirebaseService = FirebaseService;
     // Add more default settings here
 
     this.settings = settings;
@@ -131,6 +137,3 @@ class EditorController {
     return 'Login';
   }
 }
-
-EditorController.$inject = ['$timeout', '$sce'];
-export default EditorController;

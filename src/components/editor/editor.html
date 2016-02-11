@@ -3,7 +3,7 @@
     <input name="filename"
       class="editor__filename-input"
       placeholder="Enter a filename"
-      ng-model="editor.filename" />
+      ng-model="ctrl.filename" />
   <!-- Export Dropdown -->
     <div class="editor-buttons__dropdown btn-group"
       dropdown>
@@ -12,7 +12,7 @@
         Export <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li ng-click="editor.exportSource()"><a href="#"> Source </a></li>
+        <li ng-click="ctrl.exportSource()"><a href="#"> Source </a></li>
         <li><a href="#"> PDF </a></li>
       </ul>
     </div>
@@ -28,7 +28,7 @@
       <div class="dropdown-menu">
         <div class="checkbox editor-checkbox">
           <label>
-            <input type="checkbox" ng-model="editor.settings.showPreview">
+            <input type="checkbox" ng-model="ctrl.settings.showPreview">
             Show Preview
           </label>
         </div>
@@ -37,13 +37,13 @@
 
     <!-- / -->
     <button class="editor-button__save btn btn-info"
-      ng-click="editor.save()">
+      ng-click="ctrl.save()">
       <span class="glyphicon glyphicon-floppy-disk"></span>
        Save 
     </button>
     <!-- Import -->
     <button class="editor-button__import btn btn-success"
-      ng-click="editor.importFile()">
+      ng-click="ctrl.importFile()">
       <span class="glyphicon glyphicon-upload"></span>
        Import 
     </button>
@@ -53,15 +53,9 @@
     <!-- / -->
 
     <button class="editor-button__new btn btn-danger"
-      ng-click="editor.newDoc()">
+      ng-click="ctrl.newDoc()">
       <span class="glyphicon glyphicon-plus"></span>
        New 
-    </button>
-
-    <button class="login-button btn btn-success"
-      ui-sref="login">
-      <span class="glyphicon glyphicon-log-in"></span>
-       {{editor.getLoginButtonText()}} 
     </button>
 
   </div>
@@ -70,14 +64,14 @@
     <div class="editor-wrap">
       <textarea name="editor"
         class="editor__textarea"
-        ng-model="editor.content"
-        ng-keydown="editor.handleKeydown($event)">
+        ng-model="ctrl.content"
+        ng-keydown="ctrl.handleKeydown($event)">
       </textarea>
     </div>
     <div class="preview-wrap"
-      ng-show="editor.settings.showPreview">
+      ng-show="ctrl.settings.showPreview">
       <div id="preview"
-        ng-bind-html="editor.handleParseContent(editor.content)">
+        ng-bind-html="ctrl.handleParseContent(ctrl.content)">
       </div>
     </div>
   </div>

@@ -1,6 +1,8 @@
-config.$inject = ['$urlRouterProvider', '$locationProvider'];
+import angular from 'angular';
 
-export default function config($urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/');
-}
+export default angular.module('app.config', [])
+  .config(['$locationProvider', '$urlRouterProvider', ($locationProvider, $urlRouterProvider) => {
+    $locationProvider.html5Mode({ enabled: true, requireBase: false });
+
+    $urlRouterProvider.otherwise('/404');
+  }]);
