@@ -7,11 +7,12 @@ import uirouter from 'angular-ui-router';
 import uibs from 'angular-ui-bootstrap';
 //import ngFire from 'angularfire';
 
+import satellizer from 'satellizer';
 
-import {Component, StateConfig} from 'ng-forward';
+import {Component, StateConfig, provide} from 'ng-forward';
 
 import config from '../../app.config';
-//import routes from './routes';
+
 // Main css file
 import '../../main.css';
 import '../../css/overrides.css';
@@ -31,6 +32,7 @@ window.R = R;
     uirouter,
     editor,
     ngsanitize,
+    satellizer,
     uibs
   ],
   template,

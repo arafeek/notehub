@@ -230,7 +230,13 @@ module.exports = function makeWebpackConfig (options) {
       cached: false,
       colors: true,
       chunk: false
-    }
+    },
+    proxy: {
+      '/auth/*' : {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
   };
 
   return config;

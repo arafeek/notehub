@@ -8,4 +8,10 @@ Currently, most of these services already exist in some shape or form (Google Do
 various online note editors), but my goal for this project was just to create a tool with 
 a desired combination of these features, with a low technical barrier to entry.
 
+
+### Development
+`sudo mongod`
+`nodemon server/auth-server.js`
+`npm run dev `
+
 You can check it out [**HERE**](http://www.notehub.xyz)

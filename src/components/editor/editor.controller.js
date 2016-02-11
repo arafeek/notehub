@@ -3,17 +3,19 @@
 import {saveAs} from 'filesaver.js';
 import {CONFIG} from './editor.constants';
 import katex from 'katex';
+import LoginButton from '../login-button';
 import './editor.css';
 import {Component, Inject} from 'ng-forward';
 
 @Component({
   selector: 'editor',
   template: require('./editor.html'),
+  directives: [LoginButton],
 })
 @Inject('$timeout', '$sce')
 
 export default class EditorController {
-  constructor($timeout, $sce) {
+  constructor($timeout, $sce, $auth) {
     this.markdown = require('markdown-it')();
     this.$timeout = $timeout;
     this.katex = katex;
