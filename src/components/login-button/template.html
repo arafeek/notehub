@@ -1,4 +1,25 @@
-<button (click)="ctrl.authenticate()"
-  class="login-button btn btn-info">
-  {{ctrl.getButtonText()}}
-</button>
+<div>
+  <button ng-if="!ctrl.isAuthenticated()"
+    (click)="ctrl.authenticate()"
+    class="login-button btn btn-info">
+    {{ctrl.getButtonText()}}
+  </button>
+
+  <div ng-if="ctrl.isAuthenticated()"
+    class="btn-group"
+    dropdown>
+    <button class="login-button btn btn-info dropdown-toggle"
+      dropdown-toggle>
+      {{ctrl.getButtonText()}}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li (click)="ctrl.logout()">
+        <a href="#">Log Out</a>
+      </li>
+      <li (click)="ctrl.saveToDrive()">
+        <a href="#">Save to Drive </a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -20,6 +20,10 @@ export default class LoginButton {
       });
   }
 
+  logout() {
+    this.$auth.logout();
+  }
+
   getButtonText() {
     return this.isAuthenticated() ? `Logged in as ${this.username}` : 'Login with Google';
   }
