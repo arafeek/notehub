@@ -1,0 +1,24 @@
+{
+  "name": "notehub",
+  "scripts": {
+  },
+  "env": {
+    "DB": {
+      "required": true
+    },
+    "GOOGLE_SECRET": {
+      "required": true
+    },
+    "TOKEN_SECRET": {
+      "required": true
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    }
+  ]
+}
