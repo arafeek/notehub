@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "A note taking and sharing app that supports markdown syntax.",
   "scripts": {
-    "postinstall": "npm run build",
+    "postinstall": "npm run clean && npm run build",
+    "clean": "rimraf public/",
     "build": "webpack --config webpack.build.js --bail -p",
     "dev": "webpack-dev-server --history-api-fallback --hot --inline --progress",
     "test": "karma start",
@@ -15,7 +16,8 @@
     "url": "https://github.com/arafeek/notehub.git"
   },
   "engines": {
-    "node": "4.0.0"
+    "node": "4.2.1",
+    "npm": "3.5.3"
   },
   "author": "Adam Rafeek",
   "license": "None",
