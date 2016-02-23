@@ -1,1 +1,1 @@
-web: npm install webpack -g && npm run serve:dist
+web: npm run prod

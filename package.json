@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "A note taking and sharing app that supports markdown syntax.",
   "scripts": {
+    "postinstall": "npm run build",
     "build": "webpack --config webpack.build.js --bail -p",
     "dev": "webpack-dev-server --history-api-fallback --hot --inline --progress",
     "test": "karma start",
     "test:live": "karma start --auto-watch --no-single-run",
-    "serve:dist": "npm run build; node server.js"
+    "prod": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "postcss-loader": "^0.6.0",
     "ramda": "^0.17.1",
     "raw-loader": "^0.5.1",
+    "rimraf": "^2.5.2",
     "rxjs": "^5.0.0-beta.1",
     "satellizer": "^0.13.4",
     "style-loader": "^0.12.3",

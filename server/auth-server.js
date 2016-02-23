@@ -17,7 +17,11 @@ var moment = require('moment');
 var mongoose = require('mongoose');
 var request = require('request');
 
-var config = require('./config');
+// config stuff
+var DB = process.env.DB;
+var TOKEN_SECRET = process.env.TOKEN_SECRET;
+var GOOGLE_SECRET = process.env.GOOGLE_SECRET;
+
 
 // User schema
 var userSchema = new mongoose.Schema({
@@ -49,7 +53,7 @@ userSchema.methods.comparePassword = function(password, done) {
 
 var User = mongoose.model('User', userSchema);
 
-mongoose.connect(config.MONGO_URI);
+mongoose.connect(DB);
 mongoose.connection.on('error', function(err) {
   console.log('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
 });
@@ -81,7 +85,7 @@ function createJWT(user) {
     iat: moment().unix(),
     exp: moment().add(14, 'days').unix()
   };
-  return jwt.encode(payload, config.TOKEN_SECRET);
+  return jwt.encode(payload, TOKEN_SECRET);
 }
 
 // Middleware
@@ -93,7 +97,7 @@ function ensureAuthenticated(req, res, next) {
 
   var payload = null;
   try {
-    payload = jwt.decode(token, config.TOKEN_SECRET);
+    payload = jwt.decode(token, TOKEN_SECRET);
   }
   catch (err) {
     return res.status(401).send({ message: err.message });
@@ -113,7 +117,7 @@ app.post('/auth/google', function(req, res) {
   var params = {
     code: req.body.code,
     client_id: req.body.clientId,
-    client_secret: config.GOOGLE_SECRET,
+    client_secret: GOOGLE_SECRET,
     redirect_uri: req.body.redirectUri,
     grant_type: 'authorization_code'
   };
@@ -135,7 +139,7 @@ app.post('/auth/google', function(req, res) {
             return res.status(409).send({ message: 'You are already logged in' });
           }
           var token = req.headers.authorization.split(' ')[1];
-          var payload = jwt.decode(token, config.TOKEN_SECRET);
+          var payload = jwt.decode(token, TOKEN_SECRET);
           User.findById(payload.sub, function(err, user) {
             if (!user) {
               return res.status(400).send({ message: 'User not found' });
