@@ -75,7 +75,6 @@ if (app.get('env') === 'production') {
     protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
   });
 }
-app.use(express.static(path.join(__dirname, '../public')));
 
 
 // Helper
@@ -182,7 +181,14 @@ app.post('/auth/google', function(req, res) {
   });
 });
 
+// Serve the static assets
+app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '../public/index.html'));
+});
+
 // Start
 app.listen(app.get('port'), function() {
-  console.log('Auth server listening on port ' + app.get('port'));
+  console.log('Fired up on port ' + app.get('port'));
 });
