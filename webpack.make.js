@@ -193,6 +193,7 @@ module.exports = function makeWebpackConfig (options) {
       new HtmlWebpackPlugin({
         template: './src/index.html',
         inject: 'body',
+        favicon: 'favicon.png',
         //minify: BUILD
       })
     )
