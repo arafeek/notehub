@@ -5,7 +5,6 @@ import angular from 'angular';
 import ngsanitize from 'angular-sanitize';
 import uirouter from 'angular-ui-router';
 import uibs from 'angular-ui-bootstrap';
-//import ngFire from 'angularfire';
 
 import satellizer from 'satellizer';
 
@@ -17,7 +16,8 @@ import config from '../../app.config';
 import '../../main.css';
 import '../../css/overrides.css';
 // Components
-import editor from '../editor/editor.controller';
+import editor from '../editor';
+
 import R from 'ramda';
 
 import template from './app.html';
@@ -33,7 +33,7 @@ window.R = R;
     editor,
     ngsanitize,
     satellizer,
-    uibs
+    uibs,
   ],
   template,
 })

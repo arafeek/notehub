@@ -4,38 +4,31 @@ import {saveAs} from 'filesaver.js';
 import {CONFIG} from './editor.constants';
 import katex from 'katex';
 import LoginButton from '../login-button';
+import LoadButton from '../load-button';
 import './editor.css';
 import {Component, Inject} from 'ng-forward';
-
+import StorageService from '../../core/StorageService';
 @Component({
   selector: 'editor',
   template: require('./editor.html'),
-  directives: [LoginButton],
+  directives: [LoginButton, LoadButton],
+  providers: [StorageService],
 })
-@Inject('$timeout', '$sce')
-
+@Inject('$scope','$timeout', '$sce', StorageService)
 export default class EditorController {
-  constructor($timeout, $sce, $auth) {
+  constructor($scope, $timeout, $sce, StorageService) {
     this.markdown = require('markdown-it')();
+    this.$scope = $scope;
     this.$timeout = $timeout;
     this.katex = katex;
     this.$sce = $sce;
+    this.storage = StorageService;
     let settings = {};
     settings.showPreview = true;
-    // Add more default settings here
-
     this.settings = settings;
-    // In private mode, we do not have access to localStorage so fallback to
-    // sessionStorage to preserve user experience
-    try {
-      localStorage.setItem('test', null);
-      this.storage = localStorage;
-    } catch(e) {
-      this.storage = sessionStorage;
-    }
-    // Maybe think about moving the name of the object, `lastSave` into a config or something
-    let savedContent = this.storage.getItem(CONFIG.SAVE);
-    this.content = savedContent ? JSON.parse(savedContent).content : '';
+    let savedContent = this.storage.currentRecord;
+    this.content = savedContent.content || '';
+    this.filename = savedContent ? savedContent.id : '';
   }
 
   exportSource() {
@@ -46,6 +39,11 @@ export default class EditorController {
 
       saveAs(data, this.filename ? R.replace(/\s/g, '', this.filename) : 'note.md');
     }
+  }
+
+  onFileLoad(event) {
+    this.filename = event.detail.id;
+    this.content = event.detail.content;
   }
 
   importFile() {
@@ -70,12 +68,17 @@ export default class EditorController {
   }
 
   save() {
+    // TODO: Checkfor a valid name
     let saveObj = {
       content: this.content
     };
+    this.storage.addRecord(this.filename || CONFIG.SAVE, saveObj);
+  }
 
-    this.storage.setItem(CONFIG.SAVE, JSON.stringify(saveObj));
-    console.log('Content saved!');
+  newDoc() {
+    // TODO: give a choice to save or not, for now always save
+    this.save();
+    this.content = '';
   }
 
   handleKeydown(event) {

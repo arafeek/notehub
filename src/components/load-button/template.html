@@ -1,0 +1,16 @@
+<div class="editor-buttons__dropdown btn-group"
+  dropdown>
+  <button class="editor-button__save btn btn-primary dropdown-toggle"
+    dropdown-toggle>
+    Load <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li ng-repeat="record in ctrl.storage.records"
+      ng-click="ctrl.loadRecord(record.id)" >
+      <a href="#"> 
+        <strong>{{ record.id }}</strong>
+        {{ record.lastSave | date: 'short' }}
+      </a>
+    </li>
+  </ul>
+</div>
