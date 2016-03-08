@@ -5,10 +5,11 @@ import './login-button.css';
   selector: 'login-button',
   template: require('./template.html')
 })
-@Inject('$auth')
+@Inject('$auth', '$http')
 export default class LoginButton {
-  constructor($auth) {
+  constructor($auth, $http) {
     this.$auth = $auth;
+    this.$http = $http;
     this.username = localStorage.getItem('username');
   }
 

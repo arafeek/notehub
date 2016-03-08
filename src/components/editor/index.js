@@ -3,6 +3,7 @@
 import {saveAs} from 'filesaver.js';
 import {CONFIG} from './editor.constants';
 import katex from 'katex';
+import toastr from 'angular-toastr';
 import LoginButton from '../login-button';
 import LoadButton from '../load-button';
 import './editor.css';
@@ -14,15 +15,16 @@ import StorageService from '../../core/StorageService';
   directives: [LoginButton, LoadButton],
   providers: [StorageService],
 })
-@Inject('$scope','$timeout', '$sce', StorageService)
+@Inject('$scope','$timeout', '$sce', StorageService, toastr)
 export default class EditorController {
-  constructor($scope, $timeout, $sce, StorageService) {
+  constructor($scope, $timeout, $sce, StorageService, toastr) {
     this.markdown = require('markdown-it')();
     this.$scope = $scope;
     this.$timeout = $timeout;
     this.katex = katex;
     this.$sce = $sce;
     this.storage = StorageService;
+    this.toastr = toastr;
     let settings = {};
     settings.showPreview = true;
     this.settings = settings;
@@ -44,6 +46,7 @@ export default class EditorController {
   onFileLoad(event) {
     this.filename = event.detail.id;
     this.content = event.detail.content;
+    this.toastr.success('Loaded File!');
   }
 
   importFile() {
@@ -72,7 +75,9 @@ export default class EditorController {
     let saveObj = {
       content: this.content
     };
-    this.storage.addRecord(this.filename || CONFIG.SAVE, saveObj);
+    let name = this.filename || CONFIG.SAVE;
+    this.storage.addRecord(name, saveObj);
+    this.toastr.success('Saved doc: \'' + name + '\'');
   }
 
   newDoc() {
