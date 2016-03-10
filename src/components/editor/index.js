@@ -15,11 +15,10 @@ import StorageService from '../../core/StorageService';
   directives: [LoginButton, LoadButton],
   providers: [StorageService],
 })
-@Inject('$scope','$timeout', '$sce', StorageService, toastr)
+@Inject('$timeout', '$sce', StorageService, toastr)
 export default class EditorController {
-  constructor($scope, $timeout, $sce, StorageService, toastr) {
+  constructor($timeout, $sce, StorageService, toastr) {
     this.markdown = require('markdown-it')();
-    this.$scope = $scope;
     this.$timeout = $timeout;
     this.katex = katex;
     this.$sce = $sce;

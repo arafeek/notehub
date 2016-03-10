@@ -17,8 +17,8 @@
       <li (click)="ctrl.logout()">
         <a href="#">Log Out</a>
       </li>
-      <li (click)="ctrl.saveToDrive()">
-        <a href="#">Save to Drive </a>
+      <li lk-google-picker on-picked="ctrl.onPicked(docs)" on-loaded="ctrl.onLoaded()" on-cancel="ctrl.onCancel()">
+        <a href="javascript:;"> Open Drive </a>
       </li>
     </ul>
   </div>
