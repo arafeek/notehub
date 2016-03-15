@@ -1,6 +1,10 @@
 import { Injectable, Inject } from 'ng-forward';
 import nibelung from 'nibelung';
 
+/*
+ * TODO: Think about renaming this to FileService or something like that.
+ *       It's pretty much only used for file storage and management.
+ */
 @Injectable()
 export default class StorageService {
   constructor() {

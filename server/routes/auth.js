@@ -2,8 +2,10 @@ var User = require('../models/User');
 var jwt = require('jwt-simple');
 var request = require('request');
 var createJWT = require('../middleware').createJWT;
+var ensureAuthenticated = require('../middleware').ensureAuthenticated;
 var TOKEN_SECRET = process.env.TOKEN_SECRET;
 var GOOGLE_SECRET = process.env.GOOGLE_SECRET;
+
 module.exports = function(app, express) {
   var authRouter = express.Router();
 
@@ -23,7 +25,6 @@ module.exports = function(app, express) {
     request.post(accessTokenUrl, { json: true, form: params }, function(err, response, token) {
       var accessToken = token.access_token;
       var headers = { Authorization: 'Bearer ' + accessToken };
-
       // Step 2. Retrieve profile information about the current user.
       request.get({ url: peopleApiUrl, headers: headers, json: true }, function(err, response, profile) {
         if (profile.error) {
@@ -66,6 +67,7 @@ module.exports = function(app, express) {
             user.google = profile.sub;
             user.picture = profile.picture.replace('sz=50', 'sz=200');
             user.displayName = profile.name;
+            user.google_access_token = accessToken;
             user.save(function(err) {
               var token = createJWT(user);
               res.send({
@@ -77,6 +79,11 @@ module.exports = function(app, express) {
         }
       });
     });
+  });
+
+
+  authRouter.get('/drive/:fileId', ensureAuthenticated, function(req, res) {
+    
   });
 
   return authRouter;
