@@ -1,0 +1,16 @@
+<div class="off-canvas-holder">
+  <button ng-click="ctrl.toggle()"
+    class="btn btn-primary menu-btn-open">
+    <span class="glyphicon glyphicon-menu-hamburger"></span>
+  </button>
+  <div class="off-canvas-content" ng-class="{'open':ctrl.open, 'closed': !ctrl.open}">
+    <div class="off-canvas-close-holder">
+      <button ng-click="ctrl.toggle()"
+        class="btn btn-primary btn-danger off-canvas-close">
+        Close
+      </button>
+    </div>
+    <ng-content>
+    </ng-content>
+  </div>
+</div>

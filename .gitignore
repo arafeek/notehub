@@ -4,3 +4,4 @@ build
 server/config.js
 *run_prod.sh
 *.log
+*.swp

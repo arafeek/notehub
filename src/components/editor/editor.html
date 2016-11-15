@@ -1,67 +1,68 @@
 <div class="editor-page">
-  <div class="editor-buttons-container">
-    <input name="filename"
-      class="editor__filename-input"
-      placeholder="Enter a filename"
-      ng-model="ctrl.filename" />
-  <!-- Export Dropdown -->
-    <div class="editor-buttons__dropdown btn-group"
-      dropdown>
-      <button class="editor-button__save btn btn-primary dropdown-toggle"
-        dropdown-toggle>
-        Export <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li ng-click="ctrl.exportSource()"><a href="#"> Source </a></li>
-        <li><a href="#"> PDF </a></li>
-      </ul>
-    </div>
-    <!-- / -->
-    <!-- Settings Dropdown -->
-    <div class="editor-buttons__dropdown btn-group editor-buttons__setting-group"
-      dropdown>
-      <button class="editor-button__options btn btn-warning dropdown-toggle"
-        dropdown-toggle>
-        <span class="glyphicon glyphicon-cog"></span> Settings
-        <span class="caret"></span>
-      </button>
-      <div class="dropdown-menu">
-        <div class="checkbox editor-checkbox">
-          <label>
-            <input type="checkbox" ng-model="ctrl.settings.showPreview">
-            Show Preview
-          </label>
+  <off-canvas-menu>
+    <div class="editor-buttons-container">
+      <input name="filename"
+        class="editor__filename-input"
+        placeholder="Enter a filename"
+        ng-model="ctrl.filename" />
+    <!-- Export Dropdown -->
+      <div class="editor-buttons__dropdown btn-group"
+        dropdown>
+        <button class="editor-button__save btn btn-primary dropdown-toggle"
+          dropdown-toggle>
+          Export <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li ng-click="ctrl.exportSource()"><a href="#"> Source </a></li>
+          <li><a href="#"> PDF </a></li>
+        </ul>
+      </div>
+      <!-- / -->
+      <!-- Settings Dropdown -->
+      <div class="editor-buttons__dropdown btn-group editor-buttons__setting-group"
+        dropdown>
+        <button class="editor-button__options btn btn-warning dropdown-toggle"
+          dropdown-toggle>
+          <span class="glyphicon glyphicon-cog"></span> Settings
+          <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu">
+          <div class="checkbox editor-checkbox">
+            <label>
+              <input type="checkbox" ng-model="ctrl.settings.showPreview">
+              Show Preview
+            </label>
+          </div>
         </div>
       </div>
+
+      <!-- / -->
+      <button class="editor-button__save btn btn-info"
+        ng-click="ctrl.save()">
+        <span class="glyphicon glyphicon-floppy-disk"></span>
+         Save 
+      </button>
+      <!-- Import -->
+      <button class="editor-button__import btn btn-success"
+        ng-click="ctrl.importFile()">
+        <span class="glyphicon glyphicon-upload"></span>
+         Import 
+      </button>
+      <input type="file"
+        class="editor-file-upload__input"
+        id="file-upload" />
+      <!-- / -->
+
+      <button class="editor-button__new btn btn-danger"
+        ng-click="ctrl.newDoc()">
+        <span class="glyphicon glyphicon-plus"></span>
+         New 
+      </button>
+
+      <login-button></login-button>
+      <load-button (loaded-file)="ctrl.onFileLoad($event)"></load-button>
     </div>
-
-    <!-- / -->
-    <button class="editor-button__save btn btn-info"
-      ng-click="ctrl.save()">
-      <span class="glyphicon glyphicon-floppy-disk"></span>
-       Save 
-    </button>
-    <!-- Import -->
-    <button class="editor-button__import btn btn-success"
-      ng-click="ctrl.importFile()">
-      <span class="glyphicon glyphicon-upload"></span>
-       Import 
-    </button>
-    <input type="file"
-      class="editor-file-upload__input"
-      id="file-upload" />
-    <!-- / -->
-
-    <button class="editor-button__new btn btn-danger"
-      ng-click="ctrl.newDoc()">
-      <span class="glyphicon glyphicon-plus"></span>
-       New 
-    </button>
-
-    <login-button></login-button>
-    <load-button (loaded-file)="ctrl.onFileLoad($event)"></load-button>
-  </div>
-
+  </off-canvas-menu>
   <div class="editor">
     <div class="editor-wrap">
       <textarea name="editor"

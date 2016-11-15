@@ -11,7 +11,6 @@
 
 .editor-page {
   background-color: lightgray;
-  border-radius: 5px;
 }
 
 .editor-buttons-container {
@@ -42,13 +41,29 @@ input[type="file"].editor-file-upload__input {
   min-width: 400px;
   flex: 1;
   margin-right: 10px;
+  background-color: white;
 }
 
 .preview-wrap {
-  background-color: #f9f9f9;
-  border: 1px solid #aaa;
+  background-color: #f8f8f8;
   flex: 1;
   margin-left: 10px;
   min-width: 400px;
   padding: 0 10px;
+}
+
+.editor-wrap,
+.preview-wrap {
+  box-shadow: 1px 1px 3px #888888;
+}
+
+@media(max-width: 860px) {
+  .editor {
+    flex-direction: column;
+  }
+  .editor-wrap,
+  .preview-wrap {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }

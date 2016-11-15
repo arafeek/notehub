@@ -1,0 +1,30 @@
+.off-canvas-content.open {
+  transform: translateX(0);
+}
+.off-canvas-content.closed {
+  transform: translateX(-300px);
+}
+
+.off-canvas-content {
+  height: 100%;
+  width: 300px;
+  position: absolute;
+  top:0;
+  background-color: white;
+  border: 1px solid black;
+  z-index: 10;
+}
+
+.off-canvas-close-holder {
+  text-align: right;
+}
+
+.off-canvas-content {
+  transition: 300ms ease all;
+}
+
+.menu-btn-open {
+  font-size: 24px;
+  padding: 6px 24px;
+  margin: 0 10px;
+}

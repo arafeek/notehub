@@ -6,13 +6,14 @@ import katex from 'katex';
 import toastr from 'angular-toastr';
 import LoginButton from '../login-button';
 import LoadButton from '../load-button';
+import OffCanvasMenu from '../off-canvas-menu';
 import './editor.css';
 import {Component, Inject} from 'ng-forward';
 import StorageService from '../../core/StorageService';
 @Component({
   selector: 'editor',
   template: require('./editor.html'),
-  directives: [LoginButton, LoadButton],
+  directives: [LoginButton, LoadButton, OffCanvasMenu],
   providers: [StorageService],
 })
 @Inject('$timeout', '$sce', StorageService, toastr)
